@@ -15,9 +15,13 @@ class Tabuleiro():
                 is_bomb = False
                 if randint(1,100) > 50:
                     is_bomb = True
-                piece = Piece(is_bomb)
+                piece = Piece(is_bomb,False)
                 linha.append(piece)
             self.tabuleiro.append(linha)
     
     def get_piece(self,linha,coluna):
         return self.tabuleiro[linha][coluna]
+    
+    def click_bandeira(self,linha,coluna):
+        self.get_piece(linha,coluna).is_bandeira = not self.get_piece(linha,coluna).is_bandeira
+        

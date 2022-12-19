@@ -28,9 +28,17 @@ class Game():
 
         for evento in pyg.event.get():
             if evento.type == pyg.QUIT:
-
                 exit()
                 pyg.quit()
+            
+            elif evento.type == pyg.MOUSEBUTTONDOWN:
+
+                if pyg.mouse.get_pressed()[0]:
+                    pos_mouse = pyg.mouse.get_pos()
+                    pos_coluna = int(pos_mouse[0]/self.tamanho_piece[0])
+                    pos_linha = int(pos_mouse[1]/self.tamanho_piece[1])
+                    self.tabuleiro.click_bandeira(pos_linha,pos_coluna)
+
     def load_img(self):
         self.imagens = {}
         for i in listdir("assets"):
@@ -41,8 +49,13 @@ class Game():
     
     def get_img(self,piece):
 
-        if piece.is_bomb:
+        if piece.is_bandeira:
+            return "flag"
+
+        return "empty-block"
+
+        '''if piece.is_bomb:
             return "bomb-at-clicked-block"
         
         else:
-            return "empty-block"
+            return "empty-block" '''
