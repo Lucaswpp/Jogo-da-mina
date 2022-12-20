@@ -4,3 +4,4 @@ class Piece():
 
         self.is_bomb = is_bomb
         self.is_bandeira = bandeira
+        self.num_bomb = 0

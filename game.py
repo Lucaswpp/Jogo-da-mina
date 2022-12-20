@@ -49,13 +49,7 @@ class Game():
     
     def get_img(self,piece):
 
-        if piece.is_bandeira:
-            return "flag"
-
-        return "empty-block"
-
-        '''if piece.is_bomb:
+        if piece.is_bomb:
             return "bomb-at-clicked-block"
-        
-        else:
-            return "empty-block" '''
+
+        return str(piece.num_bomb)
