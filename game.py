@@ -58,14 +58,3 @@ class Game():
             return "flag"
 
         return "empty-block"
-
-
-        '''if piece.is_bandeira:
-            return "flag"
-        
-        return "empty-block"'''
-
-        '''if piece.is_bomb:
-            return "bomb-at-clicked-block"
-
-        return str(piece.num_bomb)'''

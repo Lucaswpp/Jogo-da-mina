@@ -3,8 +3,8 @@ from random import randint
 class Tabuleiro():
 
     def __init__(self):
-        self.linha = 9
-        self.coluna = 9
+        self.linha = 12
+        self.coluna = 12
         self.load_tabuleiro()
     
     def load_tabuleiro(self):
@@ -13,7 +13,7 @@ class Tabuleiro():
             linha = []
             for coluna in range(self.coluna):
                 is_bomb = False
-                if randint(1,100) < 25:
+                if randint(1,100) < 10:
                     is_bomb = True
                 piece = Piece(is_bomb,False)
                 linha.append(piece)
@@ -27,13 +27,23 @@ class Tabuleiro():
 
         peca = self.get_piece(linha,coluna)
 
+        if peca.is_click:
+            return
+
         if flag:
             
             peca.is_bandeira = not peca.is_bandeira
             return
         
         peca.is_click = True
-        
+
+        if peca.is_bomb:
+            return
+
+        if peca.num_bomb == 0:
+
+            for l,c in peca.vizinhos:
+                self.click(l,c,False)
     
     
     def load_tabuleiro_num(self):
