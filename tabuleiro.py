@@ -23,15 +23,25 @@ class Tabuleiro():
     def get_piece(self,linha,coluna):
         return self.tabuleiro[linha][coluna]
     
-    def click_bandeira(self,linha,coluna):
-        self.get_piece(linha,coluna).is_bandeira = not self.get_piece(linha,coluna).is_bandeira
+    def click(self,linha,coluna,flag):
+
+        peca = self.get_piece(linha,coluna)
+
+        if flag:
+            
+            peca.is_bandeira = not peca.is_bandeira
+            return
+        
+        peca.is_click = True
+        
+    
     
     def load_tabuleiro_num(self):
         for row in range(self.linha):
             for coluna in range(self.coluna):
                 peca = self.get_piece(row,coluna)
-                vizinhos = self.get_vizinhos(row,coluna)
-                peca.num_bomb = self.get_num_bombs(vizinhos)
+                peca.vizinhos = self.get_vizinhos(row,coluna)
+                peca.num_bomb = self.get_num_bombs(peca.vizinhos)
     
     def get_vizinhos(self,line,col):
         vizin = []

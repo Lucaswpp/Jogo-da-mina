@@ -5,3 +5,5 @@ class Piece():
         self.is_bomb = is_bomb
         self.is_bandeira = bandeira
         self.num_bomb = 0
+        self.vizinhos = []
+        self.is_click = False
