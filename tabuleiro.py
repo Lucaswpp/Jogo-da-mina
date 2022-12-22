@@ -1,10 +1,11 @@
 from peca import Piece
 from random import randint
+
 class Tabuleiro():
 
     def __init__(self):
-        self.linha = 12
-        self.coluna = 12
+        self.linha = 9
+        self.coluna = 9
         self.load_tabuleiro()
     
     def load_tabuleiro(self):
@@ -23,7 +24,7 @@ class Tabuleiro():
     def get_piece(self,linha,coluna):
         return self.tabuleiro[linha][coluna]
     
-    def click(self,linha,coluna,flag):
+    def click(self,linha,coluna,flag,game):
 
         peca = self.get_piece(linha,coluna)
 
@@ -31,19 +32,22 @@ class Tabuleiro():
             return
 
         if flag:
-            
             peca.is_bandeira = not peca.is_bandeira
             return
         
         peca.is_click = True
 
-        if peca.is_bomb:
-            return
-
         if peca.num_bomb == 0:
 
             for l,c in peca.vizinhos:
-                self.click(l,c,False)
+                self.click(l,c,False,game)
+        
+        if peca.is_bomb:
+            game.is_lose = True
+
+        else:
+            if self.check_win():
+                game.is_win = True
     
     
     def load_tabuleiro_num(self):
@@ -74,3 +78,11 @@ class Tabuleiro():
                 cont += 1
         
         return cont
+    
+    def check_win(self):
+
+        for linha in self.tabuleiro:
+            for peca in linha:
+                if not peca.is_bomb and not peca.is_click:
+                    return False
+        return True

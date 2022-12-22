@@ -1,4 +1,5 @@
 from os import listdir
+import pygame as pyg
 
 size = 8,8
 tab_lista = []
@@ -35,4 +36,8 @@ def vizinho(line,col):
     
     return vizin
 
-print(vizinho(0,0))
+pyg.init()
+
+pyg.mixer.music.load("musica/venceu.mpeg")
+
+pyg.mixer.music.play()
